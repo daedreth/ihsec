@@ -1,0 +1,53 @@
+#+STARTUP: overview
+#+TITLE: ihsec
+#+CREATOR: Dawid 'daedreth' Eckert
+#+LANGUAGE: en
+#+OPTIONS: num:nil
+
+* What?
+** (/ˈaɪzək/)
+ It's an acronym. I hate switching emacs configs. That's it.
+
+** Dependencies
+#+BEGIN_QUOTE
+All you need is bash
+All you need is bash
+All you need is bash, bash
+Bash is all you need -- John Lennon
+#+END_QUOTE
+
+** Installation
+#+BEGIN_SRC sh
+  git clone https://github.com/daedreth/ihsec.git
+  cd ihsec
+  sudo make
+#+END_SRC
+
+* How?
+** Adding configs
+ - Put all your =~/.emacs.d= directories inside of =~/.ihsec/=.
+ - Assign them unique directory names without any whitespace.
+
+** Listing
+Get a list of all your saved configurations.
+#+BEGIN_SRC sh
+  ihsec list
+#+END_SRC
+
+** Setting
+Set a chosen configuration to be used.
+#+BEGIN_SRC sh
+  ihsec set <your_choice>
+#+END_SRC
+
+** Deleting
+Delete a chosen configuration from your filesystem.
+#+BEGIN_SRC sh
+  ihsec del <your_choice>
+#+END_SRC
+
+** Help
+Omit arguments to view the usage help.
+#+BEGIN_SRC sh
+  ihsec
+#+END_SRC
