@@ -10,9 +10,9 @@
 
 ** Dependencies
 #+BEGIN_QUOTE
-All you need is bash
-All you need is bash
-All you need is bash, bash
+All you need is bash, 
+All you need is bash, 
+All you need is bash, bash. 
 Bash is all you need -- John Lennon
 #+END_QUOTE
 
