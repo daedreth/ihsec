@@ -18,9 +18,10 @@ if [ "$#" -gt 2 ]; then
     exit 1
 else
     if [ $1 = "list" ]; then
+	echo -e " Available configurations:"
 	for DIR in $CONFIGDIR; do
 	    if [[ -d $DIR ]]; then
-		echo $DIR | cut -c $(($(printf "%s" "$CONFIGDIR" | wc -m) - 1))-$(($(printf "%s" "$DIR" | wc -m) - 1))
+		echo -en "  \u2022 "; echo $DIR | cut -c $(($(printf "%s" "$CONFIGDIR" | wc -m) - 1))-$(($(printf "%s" "$DIR" | wc -m) - 1))
 	    fi
 	done
     elif [ $1 = "set" ]; then
