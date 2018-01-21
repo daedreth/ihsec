@@ -5,31 +5,22 @@ EMACSDIR=$HOME'/.emacs.d'
 
 function displayHelp
 {
-    echo -e " Usage:";
-    echo -e '\t'"ihsec" - To view this help menu.
-    echo -e '\t'"ihsec list" - To view a list of available configurations.
-    echo -e '\t'"ihsec set <config>" - To set a configuration.
-    echo -e '\t'"ihsec del <config>" - To delete a config.
-    exit 1    
+    echo -e " Usage:"; echo -e '\t'"ihsec" - To view this help menu.; echo -e '\t'"ihsec list" - To view a list of available configurations.
+    echo -e '\t'"ihsec set <config>" - To set a configuration.; echo -e '\t'"ihsec del <config>" - To delete a config.; exit 1    
 }
 
 function displayError
 {
-    echo "Something went wrong."
-    echo "Ensure ~/.emacs.d is a symlink or does not exist!"
-    exit $?    
+    echo -e "Something went wrong."; echo -e "Ensure ~/.emacs.d is a symlink or does not exist!"; exit $?    
 }
 
 function displayArgError
 {
-    echo "Wrong number of arguments entered."
-    echo "Use \"ihsec help\" or \"ihsec\" to learn about the usage."
-    exit 1
+    echo -e "Wrong number of arguments entered."; echo -e "Use \"ihsec help\" or \"ihsec\" to learn about the usage."; exit 1
 }
 
 if [ "$#" -eq 0 ]; then
-    displayHelp
-    exit 1
+    displayHelp; exit 1
 fi
 
 case "$1" in
@@ -64,23 +55,23 @@ case "$1" in
     del)
 	if [ ! "$#" -eq 2 ]; then displayArgError; fi
 	if [ -d $HOME'/.ihsec/'$2 ]; then
-	    read -p "Are you sure? This can not be undone! [y/n]: " yn
+	    read -rsn1 -p "Are you sure? This can not be undone! [y/n]: " yn
 	    case $yn in
 		[Yy]* )
 		    rm -rf $HOME'/.ihsec/'$2
 		    if [[ $? != 0 ]]; then
 			displayError
 		    else
-			echo "Configuration $2 removed!"
+			echo -e "\nConfiguration $2 removed!"
 		    fi
 		    ;;
 		
 		[Nn]* )
-		    echo "Exiting..."
+		    echo -e "\nExiting..."
 		    exit 1
 		    ;;
 		
-		* ) echo "Please answer yes or no.";;
+		* ) echo -e "\nPlease answer yes or no.";;
 	    esac
 	else
 	    echo "Invalid configuration name, ensure it exists!"
