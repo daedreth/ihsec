@@ -64,12 +64,24 @@ case "$1" in
     del)
 	if [ ! "$#" -eq 2 ]; then displayArgError; fi
 	if [ -d $HOME'/.ihsec/'$2 ]; then
-	    rm -rf $HOME'/.ihsec/'$2
-	    if [[ $? != 0 ]]; then
-		displayError
-	    else
-		echo "Configuration $2 removed!"
-	    fi
+	    read -p "Are you sure? This can not be undone! [y/n]: " yn
+	    case $yn in
+		[Yy]* )
+		    rm -rf $HOME'/.ihsec/'$2
+		    if [[ $? != 0 ]]; then
+			displayError
+		    else
+			echo "Configuration $2 removed!"
+		    fi
+		    ;;
+		
+		[Nn]* )
+		    echo "Exiting..."
+		    exit 1
+		    ;;
+		
+		* ) echo "Please answer yes or no.";;
+	    esac
 	else
 	    echo "Invalid configuration name, ensure it exists!"
 	    exit 1
