@@ -15,6 +15,7 @@ All you need is bash,
 All you need is bash, bash. 
 Bash is all you need -- John Lennon
 #+END_QUOTE
+And =git= too, almost forgot about that. Unless you won't use =ihsec= to install configs, then sure, skip =git=, it's your life.
 
 ** Installation
 #+BEGIN_SRC sh
@@ -29,7 +30,7 @@ Bash is all you need -- John Lennon
  - Assign them unique directory names without any whitespace.
 
 ** Listing
-Get a list of all your saved configurations.
+Get a list of all your saved configurations. The asterisk indicates your current one.
 #+BEGIN_SRC sh
   ihsec list
 #+END_SRC
@@ -44,6 +45,12 @@ Set a chosen configuration to be used.
 Delete a chosen configuration from your filesystem.
 #+BEGIN_SRC sh
   ihsec del <your_choice>
+#+END_SRC
+
+** Installing
+You can let =ihsec= download a config and put it in the right place.
+#+BEGIN_SRC sh
+  ihsec install <url_to_git_repo> <name_for_the_config>
 #+END_SRC
 
 ** Help
