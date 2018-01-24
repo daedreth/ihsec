@@ -30,7 +30,7 @@ And =git= too, almost forgot about that. Unless you won't use =ihsec= to install
  - Assign them unique directory names without any whitespace.
 
 ** Listing
-Get a list of all your saved configurations. The asterisk indicates your current one.
+Get a list of all your saved configurations. The arrow indicates your current one.
 #+BEGIN_SRC sh
   ihsec list
 #+END_SRC

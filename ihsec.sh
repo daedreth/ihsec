@@ -20,7 +20,7 @@ function displayArgError
 }
 
 if [ "$#" -eq 0 ]; then
-    displayHelp; exit 1
+    displayHelp
 fi
 
 case "$1" in
@@ -30,8 +30,8 @@ case "$1" in
 	echo -e " Available configurations:"
 	for DIR in $CONFIGDIR; do
 	    if [[ -d $DIR ]]; then
-		if [[ $DIR == *"$CURR_CONFIG"* ]]; then echo -en "[*]"; else echo -en "   "; fi
-		echo -en "  \u2022 "; echo -en $DIR | cut -c $(($(printf "%s" "$CONFIGDIR" | wc -m) - 1))-$(($(printf "%s" "$DIR" | wc -m) - 1))
+		if [[ $DIR == *"$CURR_CONFIG"* ]]; then echo -en "->"; else echo -en "  "; fi
+		echo -en "  \u2022" $(basename $DIR)"\n"
 	    fi
 	done
 	;;
