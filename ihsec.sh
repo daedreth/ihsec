@@ -1,17 +1,22 @@
 #!/bin/bash
 
-CONFIGDIR=$HOME'/.ihsec/*/'
+CONFIGS_DIR=$HOME'/.ihsec/'
+# Uncomment to use this script from the same folder as emacs configs
+#CONFIGS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo "Configs dir:" $CONFIGS_DIR
+CONFIGDIRS="$CONFIGS_DIR/*/"
 EMACSDIR=$HOME'/.emacs.d'
 
 function displayHelp
 {
     echo -e " Usage:"; echo -e '\t'"ihsec" - To view this help menu.; echo -e '\t'"ihsec list" - To view a list of available configurations.
-    echo -e '\t'"ihsec set <config>" - To set a configuration.; echo -e '\t'"ihsec del <config>" - To delete a config.; exit 1    
+    echo -e '\t'"ihsec set <config>" - To set a configuration.; echo -e '\t'"ihsec del <config>" - To delete a config.; exit 1
 }
 
 function displayError
 {
-    echo -e "Something went wrong."; echo -e "Ensure ~/.emacs.d is a symlink or does not exist!"; exit $?    
+    echo -e "Something went wrong."; echo -e "Ensure ~/.emacs.d is a symlink or does not exist!"; exit $?
 }
 
 function displayArgError
@@ -28,19 +33,19 @@ case "$1" in
 	if [ ! "$#" -eq 1 ]; then displayArgError; fi
 	CURR_CONFIG=$(readlink -f $HOME/.emacs.d)
 	echo -e " Available configurations:"
-	for DIR in $CONFIGDIR; do
+	for DIR in $CONFIGDIRS; do
 	    if [[ -d $DIR ]]; then
 		if [[ $DIR == *"$CURR_CONFIG"* ]]; then echo -en "->"; else echo -en "  "; fi
 		echo -en "  \u2022" $(basename $DIR)"\n"
 	    fi
 	done
 	;;
-    
+
     set)
 	if [ ! "$#" -eq 2 ]; then displayArgError; fi
-	if [ -d $HOME'/.ihsec/'$2 ]; then
+	if [ -d "$CONFIGS_DIR/$2" ]; then
 	    unlink $EMACSDIR &> /dev/null
-	    ln -s $HOME'/.ihsec/'$2 $EMACSDIR
+	    ln -s "$CONFIGS_DIR/$2" $EMACSDIR
 	    if [[ $? != 0 ]]; then
 		displayError
 	    else
@@ -51,26 +56,26 @@ case "$1" in
 	    exit 1
 	fi
 	;;
-    
+
     del)
 	if [ ! "$#" -eq 2 ]; then displayArgError; fi
 	if [ -d $HOME'/.ihsec/'$2 ]; then
 	    read -rsn1 -p "Are you sure? This can not be undone! [y/n]: " yn
 	    case $yn in
 		[Yy]* )
-		    rm -rf $HOME'/.ihsec/'$2
+		    rm -rf "$CONFIGS_DIR/$2"
 		    if [[ $? != 0 ]]; then
 			displayError
 		    else
 			echo -e "\nConfiguration $2 removed!"
 		    fi
 		    ;;
-		
+
 		[Nn]* )
 		    echo -e "\nExiting..."
 		    exit 1
 		    ;;
-		
+
 		* ) echo -e "\nPlease answer yes or no.";;
 	    esac
 	else
@@ -78,23 +83,23 @@ case "$1" in
 	    exit 1
 	fi
 	;;
-    
+
     install)
 	if [ ! "$#" -eq 3 ]; then displayArgError; fi
 	echo "Installing $3 from $2..."
-	git clone $2 $HOME/.ihsec/$3 &> /dev/null
+	git clone $2 "$CONFIGS_DIR/$3" &> /dev/null
 	if [[ $? != 0 ]]; then
 	    echo "Something went wrong, ensure your connection is stable and the link is valid."
 	else
 	    echo "Installed $3 successfully!"
 	fi
 	;;
-    
+
     help)
 	if [ ! "$#" -eq 1 ]; then displayArgError; fi
 	displayHelp
 	;;
-    
+
     *)
 	echo "Unknown command entered."
 	echo "Use \"ihsec help\" or \"ihsec\" to learn about the usage."
