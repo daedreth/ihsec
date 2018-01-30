@@ -4,7 +4,7 @@ CONFIGS_DIR=$HOME'/.ihsec/'
 # Uncomment to use this script from the same folder as emacs configs
 #CONFIGS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Configs dir:" $CONFIGS_DIR
+echo " Configuration directory: "$CONFIGS_DIR
 CONFIGDIRS="$CONFIGS_DIR/*/"
 EMACSDIR=$HOME'/.emacs.d'
 
