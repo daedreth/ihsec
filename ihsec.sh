@@ -59,7 +59,7 @@ case "$1" in
 
     del)
 	if [ ! "$#" -eq 2 ]; then displayArgError; fi
-	if [ -d $HOME'/.ihsec/'$2 ]; then
+	if [ -d "$CONFIGS_DIR/$2" ]; then
 	    read -rsn1 -p "Are you sure? This can not be undone! [y/n]: " yn
 	    case $yn in
 		[Yy]* )
