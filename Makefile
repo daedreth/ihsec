@@ -1,10 +1,11 @@
-# ihsec Makefile - I don't know why it's here.
+# ihsec Makefile
 
-TARGET = /usr/bin/ihsec
+TARGET = /usr/local/bin/ihsec
 
 .PHONY : install bash
 
 install: bash
 
 bash:
-	cp ihsec.sh ${TARGET}
+	install -D -m 755 ihsec.sh ${TARGET}
+
