@@ -10,24 +10,22 @@ EMACSDIR=$HOME'/.emacs.d'
 
 function displayHelp
 {
-    echo -e " Usage:"; echo -e '\t'"ihsec" - To view this help menu.; echo -e '\t'"ihsec list" - To view a list of available configurations.
-    echo -e '\t'"ihsec set <config>" - To set a configuration.; echo -e '\t'"ihsec del <config>" - To delete a config.
-    echo -e '\t'"ihsec install <url_to_git_repo> <name_for_the_config>" - To install a configuration via git; exit 1
+    echo -e " Usage:\n\t'ihsec' - To view this help menu.\n\t'ihsec list' - To view a list of available configurations."
+    echo -e "\t'ihsec set <config>' - To set a configuration.\n\t'ihsec del <config>' - To delete a config."
+    echo -e "\t'ihsec install <url_to_git_repo> <name_for_the_config>' - To install a configuration via git."; exit 1
 }
 
 function displayError
 {
-    echo -e "Something went wrong."; echo -e "Ensure ~/.emacs.d is a symlink or does not exist!"; exit $?
+    echo -e " Something went wrong!\n Ensure ~/.emacs.d is a symlink or does not exist!"; exit $?
 }
 
 function displayArgError
 {
-    echo -e "Wrong number of arguments entered."; echo -e "Use \"ihsec help\" or \"ihsec\" to learn about the usage."; exit 1
+    echo -e " Wrong number of arguments entered.\n Use 'ihsec help' or 'ihsec' to learn about the usage."; exit 1
 }
 
-if [ "$#" -eq 0 ]; then
-    displayHelp
-fi
+if [ "$#" -eq 0 ]; then displayHelp; fi
 
 case "$1" in
     list)
@@ -53,8 +51,7 @@ case "$1" in
 		echo "Configuration $2 set!"
 	    fi
 	else
-	    echo "Invalid configuration name, ensure it exists!"
-	    exit 1
+	    echo "Invalid configuration name, ensure it exists!"; exit 1
 	fi
 	;;
 
@@ -77,10 +74,10 @@ case "$1" in
 		    exit 1
 		    ;;
 
-		* ) echo -e "\nPlease answer yes or no.";;
+		* ) echo -e "\nPlease answer 'y' or 'n'.";;
 	    esac
 	else
-	    echo "Invalid configuration name, ensure it exists!"
+	    echo " Invalid configuration name, ensure it exists!"
 	    exit 1
 	fi
 	;;
@@ -97,11 +94,9 @@ case "$1" in
 	;;
 
     help)
-	if [ ! "$#" -eq 1 ]; then displayArgError; fi
-	displayHelp
+	if [ ! "$#" -eq 1 ]; then displayArgError; fi; displayHelp
 	;;
 
     *)
-	echo "Unknown command entered."
-	echo "Use \"ihsec help\" or \"ihsec\" to learn about the usage."
+	echo -e " Unknown command entered.\n Use 'ihsec help' or 'ihsec' to learn about the usage."
 esac
