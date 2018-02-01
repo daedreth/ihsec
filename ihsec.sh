@@ -11,7 +11,8 @@ EMACSDIR=$HOME'/.emacs.d'
 function displayHelp
 {
     echo -e " Usage:"; echo -e '\t'"ihsec" - To view this help menu.; echo -e '\t'"ihsec list" - To view a list of available configurations.
-    echo -e '\t'"ihsec set <config>" - To set a configuration.; echo -e '\t'"ihsec del <config>" - To delete a config.; exit 1
+    echo -e '\t'"ihsec set <config>" - To set a configuration.; echo -e '\t'"ihsec del <config>" - To delete a config.
+    echo -e '\t'"ihsec install <url_to_git_repo> <name_for_the_config>" - To install a configuration via git; exit 1
 }
 
 function displayError
