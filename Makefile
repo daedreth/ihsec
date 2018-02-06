@@ -7,5 +7,5 @@ TARGET = /usr/local/bin/ihsec
 install: bash
 
 bash:
-	install -D -m 755 ihsec.sh ${TARGET}
+	if [[ "$OSTYPE" == "darwin"* ]]; then cp ihsec.sh ${TARGET}; chmod 755 ${TARGET}; else install -D -m 755 ihsec.sh ${TARGET}; fi
 
