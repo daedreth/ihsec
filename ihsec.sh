@@ -30,7 +30,7 @@ if [ "$#" -eq 0 ]; then displayHelp; fi
 case "$1" in
     list)
 	if [ ! "$#" -eq 1 ]; then displayArgError; fi
-	CURR_CONFIG=$(readlink -f $HOME/.emacs.d)
+	CURR_CONFIG=$(basename $(readlink -f $HOME/.emacs.d/))
 	echo -e " Available configurations:"
 	for DIR in $CONFIGDIRS; do
 	    if [[ -d $DIR ]]; then
