@@ -3,7 +3,7 @@
 # Ihsec bash completion
 # =====================
 #
-# Bash completion support for ihsec (https://github.com/daedreth/ihsec)
+# Bash completion support with subcommands and subdirectories for ihsec (https://github.com/daedreth/ihsec)
 #
 # Installation
 # ------------
@@ -61,6 +61,6 @@ _ihsec() {
     esac
 }
 # Associate completion funtion with ihsec
-complete -F _ihsec ihsec
+complete -F _ihsec ihsec.sh
 
 # ihsec bash completion ends here
