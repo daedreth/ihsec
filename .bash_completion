@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+#
+# Ihsec bash completion
+# =====================
+#
+# Bash completion support with subcommands and subdirectories for ihsec (https://github.com/daedreth/ihsec)
+#
+# Installation
+# ------------
+# 
+# 1. For user completion, put this file under $HOME (see local completions in [5]):
+# $HOME/.bash_completion
+#
+# 2. For system wide completion change the name of this file (i.e. ihsec.bash-completion)
+# and put it in:
+# /etc/bash-completion.d
+#
+# Usage
+# -----
+# $ ihsec <first-subcommand-letter> [tab] or [tab][tab] for options
+# $ ihsec <subcommand> [tab][tab] for options or <first-config-directory-letter> [tab]
+# 
+# References
+# ----------
+# Blogs and forums
+#
+# [1] https://blog.heckel.io/2015/03/24/bash-completion-with-sub-commands-and-dynamic-options/
+# [2] https://stackoverflow.com/questions/39624071/autocomplete-in-bash-script/39729507#39729507
+#
+# Official documentation
+#
+# [3] https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion.html#Programmable-Completion
+# [4] https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html#Shell-Parameter-Expansion
+# [5] https://github.com/scop/bash-completion 
+#
+# Code;
+
+_ihsec() {
+    local cur prev dirs dirs_basenames
+
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    SUB_COMMANDS="list set del install"
+    # Subcommands completion.
+    COMPREPLY=( $(compgen -W "$SUB_COMMANDS" "$cur" ) )
+    # Cases for subcommands which needs subdirs as arguments.
+    case "${prev}" in
+	del|set)
+	    # Array of configs/subdirectories of ihsec.
+            dirs=( $(compgen -d "$HOME"/.ihsec/ ) )
+            # Show only directories basenames.
+            dirs_basenames="${dirs[*]##*/}"
+	    # Subdirectories completion.
+            COMPREPLY=( $(compgen -W "$dirs_basenames" "$cur") )
+
+            return 0
+            ;;
+	*) # Does nothing in every other case.
+            ;;
+    esac
+}
+# Associate completion funtion with ihsec
+complete -F _ihsec ihsec.sh
+
+# ihsec bash completion ends here
